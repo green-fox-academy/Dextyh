@@ -10,3 +10,5 @@ https://github.com/dextyh/git-lesson-repository.git
 https://github.com/dextyh/hello-world.git
 
 https://github.com/dextyh/patchwork.git
+
+https://github.com/dextyh/dextyh.github.io.git
