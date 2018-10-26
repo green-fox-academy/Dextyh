@@ -42,9 +42,9 @@ int main() {
     std:: cout << std::boolalpha << ( j%5 == 0 || j%3 == 0) << std::endl;
 
 
+    for (int k=0; k<4; k++)
+        std:: cout << "Apple" << std::endl;
 
-    std::string k = "Apple ";
-    std:: cout << k << k << k << k << std::endl;
 
     return 0;
 }
