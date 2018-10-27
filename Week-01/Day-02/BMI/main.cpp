@@ -6,7 +6,7 @@ int main() {
     double heightInM = 1.78;
 
     std::cout << "BMI = " << massInKg / (heightInM * heightInM) << std::endl;
-    
+
 
     return 0;
 }
