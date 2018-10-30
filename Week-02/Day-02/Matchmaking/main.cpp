@@ -10,15 +10,10 @@ std::vector<std::string> makingMatches(const std::vector<std::string>& girls, co
 
     int size = boys.size();
 
-    int x = 1;
-
     for (int i = 0; i < size; ++i) {
 
         something.push_back(girls[i]);
         something.push_back(boys[i]);
-
-        x+=2;
-
 
 
     }
