@@ -5,7 +5,7 @@
 std::vector<std::string> makingMatches(const std::vector<std::string>& girls, const std::vector<std::string>& boys)
 {
 
-    std::vector<std::string> something = girls;
+    std::vector<std::string> something;
 
 
     int size = boys.size();
@@ -14,7 +14,8 @@ std::vector<std::string> makingMatches(const std::vector<std::string>& girls, co
 
     for (int i = 0; i < size; ++i) {
 
-        something.insert(something.begin() + 1, boys[i]);
+        something.push_back(girls[i]);
+        something.push_back(boys[i]);
 
         x+=2;
 
