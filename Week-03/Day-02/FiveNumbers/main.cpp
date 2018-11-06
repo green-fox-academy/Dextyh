@@ -1,6 +1,7 @@
 #include <iostream>
 
 
+int pointer(int* x);
 
 int main() {
 
@@ -23,7 +24,7 @@ int main() {
     for (int i =0; i < 5; i++)
     {
 
-        std::cout << &numbers[i] << std::endl;
+        std::cout << pointer(&numbers[i]) << std::endl;
 
     }
 
@@ -31,3 +32,14 @@ int main() {
     return 0;
 }
 
+
+int pointer(int* x)
+{
+
+    int a;
+
+    a = *x;
+
+    return a;
+
+}
