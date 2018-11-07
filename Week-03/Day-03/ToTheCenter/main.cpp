@@ -2,8 +2,8 @@
 #include <SDL.h>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 1600;
+const int SCREEN_HEIGHT = 1200;
 
 //Draws geometry on the canvas
 void draw();
@@ -116,14 +116,23 @@ int main( int argc, char* args[] )
 
 void function() {
 
-    int y = 0;
 
-    for (y;y < SCREEN_WIDTH; y++) {
+    for (int y = 0; y < SCREEN_WIDTH; y++) {
 
-        y= y+25;
-        SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-        SDL_RenderDrawLine(gRenderer, 0, y, SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
 
+        SDL_SetRenderDrawColor( gRenderer, rand() % 255+1, rand() % 255+1, rand() % 255+1, 0xFF );
+        SDL_RenderDrawLine(gRenderer, 0, y, SCREEN_WIDTH, y);
+
+        y = y + 1;
+    }
+
+    for (int x = 0; x < SCREEN_WIDTH; x++) {
+
+
+        SDL_SetRenderDrawColor( gRenderer, rand() % 255+1, rand() % 255+1, rand() % 255+1, 0xFF );
+        SDL_RenderDrawLine(gRenderer, x, 0, x, SCREEN_HEIGHT);
+
+        x = x + 1;
     }
 
 
