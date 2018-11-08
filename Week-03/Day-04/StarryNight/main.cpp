@@ -3,8 +3,6 @@
 #include <time.h>
 #include <stdlib.h>
 #include <cstdlib>
-#include <math.h>
-
 
 
 //Screen dimension constants
@@ -78,6 +76,9 @@ void close()
 
 int main( int argc, char* args[] )
 {
+
+    srand(time(nullptr));
+
     //Start up SDL and create window
     if( !init() )
     {
@@ -92,6 +93,9 @@ int main( int argc, char* args[] )
     //Event handler
     SDL_Event e;
 
+
+    bool once = true;
+
     //While application is running
     while( !quit ) {
         //Handle events on queue
@@ -102,15 +106,24 @@ int main( int argc, char* args[] )
             }
         }
 
+        if(once) {
+
         //Clear screen
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(gRenderer);
 
-        draw();
+                draw();
+
 
         //Update screen
         SDL_RenderPresent(gRenderer);
+
+            once = false;
+        }
+
+
     }
+
 
     //Free resources and close SDL
     close();
@@ -122,74 +135,24 @@ int main( int argc, char* args[] )
 
 void function() {
 
-   int a = SCREEN_WIDTH;
-   int b = SCREEN_HEIGHT;
-   int x = 0;
 
-    for (int i = 0; i < 1000; i++) {
+    SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0x00, 0xFF );
+    SDL_Rect Night = {0, 0, 800, 600};
+    SDL_RenderFillRect (gRenderer, &Night);
 
-        SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
 
-        SDL_RenderDrawLine(gRenderer, 0, x, a, x);
 
-        x = x + 1;
+    for (int i = 0; i < 500; i++) {
+
+        int stars = rand() % 250 + 1;
+
+        SDL_SetRenderDrawColor( gRenderer, stars, stars, stars, 0xFF );
+        SDL_Rect Stars = {rand() % 800, rand() % 600, 3, 3};
+        SDL_RenderFillRect (gRenderer, &Stars);
+
 
     }
 
-    x = 0;
-
-
-    for (int i = 0; i < 1000; i++) {
-
-        SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-
-        SDL_RenderDrawLine(gRenderer, 0, (b-b/3) + x, a, (b-b/3) + x);
-
-        x = x + 1;
-
-    }
-
-    x = 0;
-
-//ház
-    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xE4, 0xC4, 0xFF );
-    SDL_Rect rect1 = {500, 300, 150, 150};
-    SDL_RenderFillRect (gRenderer, &rect1);
-//nap
-    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0x00, 0x1E );
-    SDL_Rect rect2 = {40, 40, 70, 70};
-    SDL_RenderFillRect (gRenderer, &rect2);
-
-
-//tető
-
-    int f = 300;
-
-    int left = 500;
-    int right = 650;
-
-    for (int i = 0; i < 75; i++) {
-
-        SDL_SetRenderDrawColor( gRenderer, 0xD2, 0x69, 0x00, 0x1E );
-        SDL_RenderDrawLine(gRenderer, left, f, right, f);
-
-        left = left + 1;
-        right = right - 1;
-        f = f - 1;
-    }
-
- //ajtó
-
-    SDL_SetRenderDrawColor( gRenderer, 0xF4, 0xA4, 0x60, 0xFF );
-    SDL_Rect rect3 = {600, 380, 50, 70};
-    SDL_RenderFillRect (gRenderer, &rect3);
-
-
-    //kilincs
-
-    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-    SDL_Rect rect4 = {603, 415, 10, 3};
-    SDL_RenderFillRect (gRenderer, &rect4);
 
 
 
