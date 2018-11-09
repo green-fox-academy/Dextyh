@@ -158,9 +158,9 @@ void function() {
 
     double height = 1.73205080757 * length;
 
-    double xS1 = 30;
+    double xS1 = SCREEN / 4 - 15;
     double yS1 = SCREEN - 8 * 30;
-    double xS2 = 30 * 2;
+    double xS2 = SCREEN / 4 + 15;
     double yS2 = SCREEN - 8 * 30;
 
     double x1 = xS1;
