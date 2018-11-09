@@ -122,6 +122,20 @@ int main( int argc, char* args[] )
 
 void function() {
 
+    int cord = 0;
+
+    for (int g = 0; g < 600; g++) {
+
+        SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0x00, 0xFF );
+        SDL_RenderDrawLine(gRenderer, 0, cord, 600, cord);
+
+        cord = cord + 1;
+
+
+    }
+
+
+
 
     //bot left
     int xStart1 = 0;
