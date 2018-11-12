@@ -16,7 +16,7 @@ int main() {
 
 
         std::cout << "Give me a number!" << std::endl;
-        std::cout << "Your number: ";
+        std::cout << "Your nDmber: ";
         std::cin >> number;
 
         if (number == 0) {
