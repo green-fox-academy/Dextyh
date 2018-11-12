@@ -140,7 +140,7 @@ void hexagon(double x1, double y1, double x2, double y2) {
         double newx = x2 + (x * cos(alfa) - y * sin(alfa));
         double newy = y2 + (x * sin(alfa) + y * cos(alfa));
 
-        SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0xFF, 0xFF);
         SDL_RenderDrawLine(gRenderer, x1,y1,newx,newy);
 
         x1 = newx;
@@ -152,7 +152,17 @@ void hexagon(double x1, double y1, double x2, double y2) {
 
 void function() {
 
+    int cord = 0;
 
+    for (int g = 0; g < 600; g++) {
+
+        SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0x00, 0xFF );
+        SDL_RenderDrawLine(gRenderer, 0, cord, 600, cord);
+
+        cord = cord + 1;
+
+
+    }
 
     double length = 30;
 
