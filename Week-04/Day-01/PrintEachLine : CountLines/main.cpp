@@ -36,6 +36,8 @@ int main() {
         std::cout << numberOfLines << ". Line: " << line << std::endl;
     }
 
+    std::cout << "The file contain: " << numberOfLines << " lines." << std::endl;
+
     FileRead.close();
 
     return 0;
