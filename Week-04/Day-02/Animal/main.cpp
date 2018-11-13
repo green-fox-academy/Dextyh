@@ -16,15 +16,15 @@ Every animal can play() which increases both by one
 int main() {
 
     Animal Lion("Lion");
-    std::cout << "Hunger: " << Lion.getHunger() << " | Thirst: " << Lion.getThirst() << std::endl;
+    std::cout << "Hunger: " << Lion.getHunger() << " | Thirst: " << Lion.getThirst() << std::endl << std::endl;
+
     Lion.eat();
     std::cout << "Hunger: " << Lion.getHunger() << " | Thirst: " << Lion.getThirst() << std::endl;
     Lion.drink();
     std::cout << "Hunger: " << Lion.getHunger() << " | Thirst: " << Lion.getThirst() << std::endl;
-    Lion.play();
-    Lion.play();
-    Lion.play();
-    Lion.play();
+    for (int i = 0; i < 5; i++) {
+        Lion.play();
+    }
     std::cout << "Hunger: " << Lion.getHunger() << " | Thirst: " << Lion.getThirst() << std::endl;
 
 
