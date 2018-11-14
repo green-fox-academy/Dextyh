@@ -24,9 +24,5 @@ int main(int argc, char* args[])
         diceSet.roll(i);
     }
 
-
-
-
-
     return 0;
 }
