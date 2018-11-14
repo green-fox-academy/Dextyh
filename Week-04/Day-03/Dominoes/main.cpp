@@ -35,18 +35,9 @@ int main(int argc, char* args[])
             if (number == dominoes[k].getValues().first ) {
                 i = k;
                 break;
-
             }
-
         }
-
     }
-
-
-
-
-
-
 
     return 0;
 }
