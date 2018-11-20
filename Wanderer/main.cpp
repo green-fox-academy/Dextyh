@@ -1,113 +1,177 @@
-#include <iostream>
+/*This source code copyrighted by Lazy Foo' Productions (2004-2015)
+and may not be redistributed without written permission.*/
+
+//Using SDL, SDL_image, standard IO, and strings
 #include <SDL.h>
-#include <time.h>
-#include <stdlib.h>
-#include <cstdlib>
-#include <math.h>
-
-#include <fstream>
-
-
-
+#include <SDL_image.h>
+#include <stdio.h>
+#include <string>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 600;
-const int SCREEN_HEIGHT = 600;
-
-//Draws geometry on the canvas
-void draw();
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 
 //Starts up SDL and creates window
 bool init();
 
+//Loads media
+bool loadMedia();
+
 //Frees media and shuts down SDL
 void close();
 
-//The window we'll be rendering to
-SDL_Window* gWindow = nullptr;
+//Loads individual image
+SDL_Surface* loadSurface( std::string path );
 
-//The window renderer
-SDL_Renderer* gRenderer = nullptr;
+//The window we'll be rendering to
+SDL_Window* gWindow = NULL;
+
+//The surface contained by the window
+SDL_Surface* gScreenSurface = NULL;
+
+//Current displayed PNG image
+SDL_Surface* gPNGSurface = NULL;
 
 bool init()
 {
+    //Initialization flag
+    bool success = true;
+
     //Initialize SDL
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
-        std::cout << "SDL could not initialize! SDL Error: " << SDL_GetError() << std::endl;
-        return false;
+        printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+        success = false;
     }
-
-    //Create window
-    gWindow = SDL_CreateWindow( "Colored Box", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-    if( gWindow == nullptr )
+    else
     {
-        std::cout << "Window could not be created! SDL Error: " << SDL_GetError() << std::endl;
-        return false;
+        //Create window
+        gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+        if( gWindow == NULL )
+        {
+            printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
+            success = false;
+        }
+        else
+        {
+            //Initialize PNG loading
+            int imgFlags = IMG_INIT_PNG;
+            if( !( IMG_Init( imgFlags ) & imgFlags ) )
+            {
+                printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+                success = false;
+            }
+            else
+            {
+                //Get window surface
+                gScreenSurface = SDL_GetWindowSurface( gWindow );
+            }
+        }
     }
 
-    //Create renderer for window
-    gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED );
-    if( gRenderer == nullptr )
+    return success;
+}
+
+bool loadMedia()
+{
+    //Loading success flag
+    bool success = true;
+
+    //Load PNG surface
+    gPNGSurface = loadSurface( "loaded.png" );
+    if( gPNGSurface == NULL )
     {
-        std::cout << "Renderer could not be created! SDL Error: " << SDL_GetError() << std::endl;
-        return false;
+        printf( "Failed to load PNG image!\n" );
+        success = false;
     }
 
-    //Initialize renderer color
-    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-
-    return true;
+    return success;
 }
 
 void close()
 {
+    //Free loaded image
+    SDL_FreeSurface( gPNGSurface );
+    gPNGSurface = NULL;
+
     //Destroy window
-    SDL_DestroyRenderer( gRenderer );
     SDL_DestroyWindow( gWindow );
-    gWindow = nullptr;
-    gRenderer = nullptr;
+    gWindow = NULL;
 
-
+    //Quit SDL subsystems
+    IMG_Quit();
     SDL_Quit();
+}
+
+SDL_Surface* loadSurface( std::string path )
+{
+    //The final optimized image
+    SDL_Surface* optimizedSurface = NULL;
+
+    //Load image at specified path
+    SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
+    if( loadedSurface == NULL )
+    {
+        printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
+    }
+    else
+    {
+        //Convert surface to screen format
+        optimizedSurface = SDL_ConvertSurface( loadedSurface, gScreenSurface->format, NULL );
+        if( optimizedSurface == NULL )
+        {
+            printf( "Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+        }
+
+        //Get rid of old loaded surface
+        SDL_FreeSurface( loadedSurface );
+    }
+
+    return optimizedSurface;
 }
 
 int main( int argc, char* args[] )
 {
-
     //Start up SDL and create window
     if( !init() )
     {
-        std::cout << "Failed to initialize!" << std::endl;
-        close();
-        return -1;
+        printf( "Failed to initialize!\n" );
     }
+    else
+    {
+        //Load media
+        if( !loadMedia() )
+        {
+            printf( "Failed to load media!\n" );
+        }
+        else
+        {
+            //Main loop flag
+            bool quit = false;
 
-    //Main loop flag
-    bool quit = false;
+            //Event handler
+            SDL_Event e;
 
-    //Event handler
-    SDL_Event e;
+            //While application is running
+            while( !quit )
+            {
+                //Handle events on queue
+                while( SDL_PollEvent( &e ) != 0 )
+                {
+                    //User requests quit
+                    if( e.type == SDL_QUIT )
+                    {
+                        quit = true;
+                    }
+                }
 
-    //While application is running
-    while( !quit ) {
-        //Handle events on queue
-        while (SDL_PollEvent(&e) != 0) {
-            //User requests quit
-            if (e.type == SDL_QUIT) {
-                quit = true;
+                //Apply the PNG image
+                SDL_BlitSurface( gPNGSurface, NULL, gScreenSurface, NULL ); //sdl rekt tipusu
+
+                //Update the surface
+                SDL_UpdateWindowSurface( gWindow );
             }
         }
-
-        //Clear screen
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-
-
-        draw();
-
-        //Update screen
-        SDL_RenderPresent(gRenderer);
     }
 
     //Free resources and close SDL
@@ -115,68 +179,3 @@ int main( int argc, char* args[] )
 
     return 0;
 }
-
-
-void draw()
-{
-
-
-
-    SDL_Surface *imageSurface = NULL;
-
-    SDL_Event windowEvent;
-
-    imageSurface = SDL_LoadBMP( "floor.bmp" );
-    if( imageSurface == NULL )
-    {
-        std::cout << "SDL could not load image! SDL Error: " << SDL_GetError( ) << std::endl;
-    }
-
-    while ( true )
-    {
-        if ( SDL_PollEvent( &windowEvent ) )
-        {
-            if ( SDL_QUIT == windowEvent.type )
-            {
-                break;
-            }
-        }
-
-        SDL_BlitSurface( imageSurface, NULL, windowSurface, NULL );
-
-    SDL_FreeSurface( imageSurface );
-    SDL_FreeSurface( windowSurface );
-
-    imageSurface = NULL;
-    windowSurface = NULL;
-
-    }
-
-
-
-}
-
-
-
-/*
-    std::ofstream img ("floor.bmp");
-    img << "P3" << std::endl;
-    img << 200 << " " << 200 << std::endl;
-    img << "200" << std::endl;
-
-    for (int i = 0; i < 200; ++i) {
-        for (int j = 0; j < 200; ++j) {
-
-            int x = j % 200;
-            int y = i % 200;
-            int z = i * j % 200;
-
-            img << x << " " << y << " " << z << std::endl;
-        }
-
-    }
-
-*/
-
-
-
