@@ -2,21 +2,17 @@
 #define INSTRUMENTS_ELECTRICGUITAR_H
 
 #include <iostream>
-#include "instrument.h"
 #include "stringedInstrument.h"
 
-class ElectricGuitar : StringedInstrument {
+class ElectricGuitar : public StringedInstrument {
 
 public:
 
     ElectricGuitar();
     ElectricGuitar(int numberOfStrings);
 
-    
-
-protected:
-
-
+    std::string sound() override;
+    void play() override;
 
 };
 

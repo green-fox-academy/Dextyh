@@ -2,6 +2,8 @@
 #include "instrument.h"
 #include "stringedInstrument.h"
 #include "electricGuitar.h"
+#include "bassGuitar.h"
+#include "violin.h"
 
 
 int main( int argc, char* args[] )

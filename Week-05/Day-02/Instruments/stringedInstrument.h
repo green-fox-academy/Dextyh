@@ -4,7 +4,7 @@
 #include <iostream>
 #include "instrument.h"
 
-class StringedInstrument : Instrument {
+class StringedInstrument : public Instrument {
 
 public:
 
