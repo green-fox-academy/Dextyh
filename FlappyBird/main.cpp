@@ -55,12 +55,15 @@ int main(int argc, char *args[]) {
 
 
     int x = 400;
+    int counter = 0;
     std::vector<Pipe> pipes;
 
     for (int i = 0; i < 100; ++i) {
         pipes.push_back(Pipe(x));
         x = x + 150;
     }
+
+
 
 
     //Main loop flag
@@ -87,7 +90,7 @@ int main(int argc, char *args[]) {
                 switch (e.key.keysym.sym) {
 
                     case SDLK_SPACE:
-                        std::cout << "INFO: SPACE" << std::endl;
+                        // std::cout << "INFO: SPACE" << std::endl;
                         bird.setYPosition(birdY);
                         birdY = birdY - 50;
                         break;
@@ -125,6 +128,13 @@ int main(int argc, char *args[]) {
                     pipes[i].move();
                 }
 
+                for (int k = 0; k < pipes.size(); ++k) {
+                    if (pipes[k].getXPosition() == 50) {
+                        counter++;
+                        std::cout << "Score: " << counter << std::endl;
+                    }
+                }
+
             }
             //TIMER
         }
@@ -145,6 +155,8 @@ int main(int argc, char *args[]) {
             pipes[j].drawPipeTop(resources, gRenderer);
             pipes[j].drawPipeBot(resources, gRenderer);
         }
+
+
 
         //Update screen
         SDL_RenderPresent(gRenderer);

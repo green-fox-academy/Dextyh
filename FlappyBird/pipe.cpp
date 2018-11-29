@@ -11,6 +11,10 @@ void Pipe::setVisible() {
     _isVisible = true;
 }
 
+int Pipe::getXPosition() {
+    return _xPosition;
+}
+
 void Pipe::move() {
     _xPosition = _xPosition - 2;
 }

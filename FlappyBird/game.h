@@ -29,7 +29,7 @@ bool init() {
     }
 
     //Create window
-    gWindow = SDL_CreateWindow("Wanderer - The RPG game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+    gWindow = SDL_CreateWindow("Flappy Bird", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                SCREEN_WIDTH,
                                SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (gWindow == nullptr) {

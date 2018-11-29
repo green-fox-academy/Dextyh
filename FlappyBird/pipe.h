@@ -12,6 +12,8 @@ public:
     void drawPipeTop(const Resources& resources, SDL_Renderer* renderer);
     void drawPipeBot(const Resources& resources, SDL_Renderer* renderer);
     void setVisible();
+    int getXPosition();
+
     void move();
 
 private:
