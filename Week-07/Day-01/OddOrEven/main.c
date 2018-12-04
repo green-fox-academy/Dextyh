@@ -17,7 +17,7 @@ int main() {
 
     isEven(number);
     isEven1(number);
-    
+
     return 0;
 }
 
