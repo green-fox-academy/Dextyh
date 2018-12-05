@@ -32,7 +32,7 @@ int isIn(char * sentence, char * word)
                 newI++;
             }
             if (bool == 1) {
-                printf("Your world is in the sentence!");
+                printf("Your world is in the sentence! Index number of the word: ");
                 return wordCounter;
             }
         }
