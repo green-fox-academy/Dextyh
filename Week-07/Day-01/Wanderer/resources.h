@@ -1,0 +1,7 @@
+#ifndef WANDERER_RESOURCES_H
+#define WANDERER_RESOURCES_H
+
+
+
+
+#endif
