@@ -2,8 +2,11 @@
 #include <stdlib.h>
 
 int line_counter(char * filename);
+void write_multi_lines(char * filename, char * word, int number);
 
 int main() {
+
+    write_multi_lines("my-file.txt", "akombakom", 5);
 
     FILE * file_pointer;
     file_pointer = fopen("my-file.txt", "r");
@@ -37,4 +40,20 @@ int line_counter(char * filename)
     }
 
     return l_counter;
+}
+
+void write_multi_lines(char * filename, char * word, int number)
+{
+    FILE * file_pointer;
+    file_pointer = fopen(filename, "w");
+    if(!fopen(filename,"r")) {
+        puts("Couldn't open your file you bastard!");
+    }
+
+    for (int i = 0; i < number; ++i) {
+        fprintf(file_pointer, word);
+        fprintf(file_pointer, "\n");
+    }
+
+    fclose(file_pointer);
 }
