@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define DISTANCE 345
+
 int line_counter(char * filename);
 void write_multi_lines(char * filename, char * word, int number);
 
@@ -14,12 +16,23 @@ int main() {
     char single_line[100];
     while(!feof(file_pointer)) {
         fgets(single_line, 100, file_pointer);
-        puts(single_line);
+        printf("%s", single_line);
     }
 
     fclose(file_pointer);
 
     printf("%d", line_counter("my-file.txt"));
+
+    printf("\n%d\n", 65);
+
+    int seconds = 17;
+    float speed = (float)DISTANCE / (float)seconds;
+    printf("%f\n", speed);
+
+    int array[] = { 103, 114, 101, 101, 110, 32, 102, 111, 120};
+    for (int i = 0; i < sizeof(array) / sizeof(array[0]); ++i) {
+        printf("%c", array[i]);
+    }
 
     return 0;
 }
