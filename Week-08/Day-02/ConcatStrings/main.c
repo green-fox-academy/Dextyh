@@ -16,7 +16,7 @@ int main() {
 
 char* connect(char* first_name, char* last_name)
 {
-    int size = (int)strlen(first_name) + (int)strlen(last_name);
+    size_t size = strlen(first_name) + strlen(last_name);
 
     char* full_name = calloc(size + 1, sizeof(char));
 
