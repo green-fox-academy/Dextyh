@@ -18,5 +18,7 @@ int main() {
 
     free(array);
 
+    // Malloc let memory garbage at "empty" slots in the array, but calloc change them to 0
+
     return 0;
 }
