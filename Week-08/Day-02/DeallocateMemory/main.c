@@ -17,7 +17,7 @@ int main() {
         printf("%d ", array[j]);
     }
 
-    realloc(array, 0);
+    array = (int*)realloc(array, 0);
 
     return 0;
 }

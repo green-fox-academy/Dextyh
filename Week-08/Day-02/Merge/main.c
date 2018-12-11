@@ -35,7 +35,7 @@ int main() {
 
 void push_back(int* array, int number, int *size)
 {
-    *size += 1;
+    (*size)++;
     array = (int*)realloc(array, *size);
     array[*size-1] = number;
 }
