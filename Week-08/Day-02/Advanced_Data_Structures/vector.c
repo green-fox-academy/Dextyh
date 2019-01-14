@@ -5,7 +5,7 @@
 vector_t* vector_create()
 {
     vector_t* vector = (vector_t*) malloc(sizeof(vector_t));
-    vector->elements = calloc(5, sizeof(void*));
+    vector->elements = malloc(5 * sizeof(void*));
     vector->capacity = 5;
     vector->size = 0;
 
@@ -16,16 +16,6 @@ void free_vector(vector_t* vector)
 {
     free(vector->elements);
     free(vector);
-}
-
-int get_capacity(vector_t* vector)
-{
-    return vector->capacity;
-}
-
-int get_size(vector_t* vector)
-{
-    return vector->size;
 }
 
 void push_back_vector(vector_t* vector, void* element)

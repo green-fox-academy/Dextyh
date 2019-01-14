@@ -16,8 +16,8 @@ int main() {
         number += 10;
     }
 
-    // transform(vector, double_element);
-    // transform(vector, shuffle_element);
+    transform(vector, double_element);
+    transform(vector, shuffle_element);
 
     erase_vector(vector, 2);
     erase_last_vector(vector);
@@ -27,13 +27,13 @@ int main() {
     insert_end_vector(vector, (void*)500);
     insert_start_vector(vector, (void*)230);
 
-    for (int j = 0; j < get_size(vector); ++j) {
+    for (int j = 0; j < vector->size; ++j) {
         int counter = j + 1;
         printf("%d. Element: %d\n", counter, (int)vector->elements[j]);
     }
 
-    printf("\nCapacity of the vector: %d\n",get_capacity(vector));
-    printf("Size of the vector: %d\n\n",get_size(vector));
+    printf("\nCapacity of the vector: %d\n",vector->capacity);
+    printf("Size of the vector: %d\n\n",vector->size);
 
     printf("%d\n", search_vector(vector, (void*) 40));
 
