@@ -3,7 +3,6 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
-#include <sqlite3.h>
 
 #define PI 3.14159265
 #define NAME "OpenCV"
